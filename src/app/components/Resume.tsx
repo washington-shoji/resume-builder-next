@@ -1,20 +1,22 @@
 import React, { forwardRef, ForwardedRef } from 'react';
+import { ResumeOneFormInput } from '../types/resume-data.types';
 
-interface ArticleProps {
-	// Define any props your component might need here
+interface Props {
+	formData: ResumeOneFormInput;
 }
 
-function Resume(props: ArticleProps, ref: ForwardedRef<HTMLDivElement>) {
+function Resume(props: Props, ref: ForwardedRef<HTMLDivElement>) {
+	const { formData } = props;
 	return (
 		<div className='App-resume min-h-screen bg-gray-transparent ' ref={ref}>
 			<div className=' p-4'>
 				<div className='flex rounded-t-lg bg-blue-400 sm:px-2 w-full'>
 					<div className='w-2/3 sm:text-center pl-5 mt-10 text-start mb-4'>
 						<p className='font-poppins font-bold text-white text-heading sm:text-4xl text-2xl text-start'>
-							Developer's Name
+							{formData.personalData?.heading?.fullName ?? 'Your Name'}
 						</p>
 						<p className='sm:text-2xl text-heading text-start'>
-							Software Engineer
+							{formData.personalData?.heading?.roleTitle ?? 'Your Role'}
 						</p>
 					</div>
 				</div>
@@ -48,7 +50,9 @@ function Resume(props: ArticleProps, ref: ForwardedRef<HTMLDivElement>) {
 												/>
 											</svg>
 										</a>
-										<div className='ml-2 truncate'>developerge@email.com</div>
+										<div className='ml-2 truncate'>
+											{formData.personalData?.contact?.email ?? 'Your email'}
+										</div>
 									</div>
 									<div className='flex items-center my-1'>
 										<a className='w-6 text-gray-700 hover:text-orange-600'>
@@ -69,7 +73,10 @@ function Resume(props: ArticleProps, ref: ForwardedRef<HTMLDivElement>) {
 												<path d='M7.2 8.809H4V19.5h3.2V8.809Z' />
 											</svg>
 										</a>
-										<div className='ml-2 truncate'>Developer LinkedIn</div>
+										<div className='ml-2 truncate'>
+											{formData.personalData?.contact?.linkedInLink ??
+												'Your LinkedIn'}
+										</div>
 									</div>
 									<div className='flex items-center my-1'>
 										<a
@@ -94,7 +101,10 @@ function Resume(props: ArticleProps, ref: ForwardedRef<HTMLDivElement>) {
 												/>
 											</svg>
 										</a>
-										<div className='ml-2'>04000000</div>
+										<div className='ml-2'>
+											{formData.personalData?.contact?.phoneNumber ??
+												'Your Phone Number'}
+										</div>
 									</div>
 									<div className='flex items-center my-1'>
 										<a
@@ -119,7 +129,10 @@ function Resume(props: ArticleProps, ref: ForwardedRef<HTMLDivElement>) {
 												/>
 											</svg>
 										</a>
-										<div>Developer's GitHub</div>
+										<div>
+											{formData.personalData?.contact?.githubLink ??
+												'Your GitHub'}
+										</div>
 									</div>
 								</div>
 							</div>
@@ -143,9 +156,11 @@ function Resume(props: ArticleProps, ref: ForwardedRef<HTMLDivElement>) {
 										>
 											<path d='M11.782 5.72a4.773 4.773 0 0 0-4.8 4.173 3.43 3.43 0 0 1 2.741-1.687c1.689 0 2.974 1.972 3.758 2.587a5.733 5.733 0 0 0 5.382.935c2-.638 2.934-2.865 3.137-3.921-.969 1.379-2.44 2.207-4.259 1.231-1.253-.673-2.19-3.438-5.959-3.318ZM6.8 11.979A4.772 4.772 0 0 0 2 16.151a3.431 3.431 0 0 1 2.745-1.687c1.689 0 2.974 1.972 3.758 2.587a5.733 5.733 0 0 0 5.382.935c2-.638 2.933-2.865 3.137-3.921-.97 1.379-2.44 2.208-4.259 1.231-1.253-.673-2.19-3.443-5.963-3.317Z' />
 										</svg>
-										<div className='ml-2'>Tailwind CSS</div>
+										<div className='ml-2'>
+											{formData?.skillData?.label ?? 'Your Skill'}
+										</div>
 									</div>
-									<div className='flex items-center my-1'>
+									{/* <div className='flex items-center my-1'>
 										<svg
 											className='w-6 text-gray-700'
 											aria-hidden='true'
@@ -223,7 +238,7 @@ function Resume(props: ArticleProps, ref: ForwardedRef<HTMLDivElement>) {
 											/>
 										</svg>
 										<div className='ml-2'>Html, Css, JS</div>
-									</div>
+									</div> */}
 								</div>
 							</div>
 
@@ -235,15 +250,20 @@ function Resume(props: ArticleProps, ref: ForwardedRef<HTMLDivElement>) {
 
 								<div className='flex flex-col space-y-1'>
 									<div className='flex flex-col'>
-										<p className='font-semibold text-xs text-gray-700'>2021</p>
+										<p className='font-semibold text-xs text-gray-700'>
+											{formData?.educationalData?.year ?? 'Graduation Year'}
+										</p>
 										<p className='text-sm font-medium'>
 											<span className='text-blue-400'>
-												M.T.S (COMPUTER SCIENCE)
+												{formData?.educationalData?.educationTitle ??
+													'Your Education Title'}
 											</span>
-											, UTS
+											,{' '}
+											{formData?.educationalData?.institution ??
+												'Your Institution'}
 										</p>
 									</div>
-									<div className='flex flex-col'>
+									{/* <div className='flex flex-col'>
 										<p className='font-semibold text-xs text-gray-700'>2017</p>
 										<p className='text-sm font-medium'>
 											<span className='text-blue-400'>
@@ -251,7 +271,7 @@ function Resume(props: ArticleProps, ref: ForwardedRef<HTMLDivElement>) {
 											</span>
 											, UNSW
 										</p>
-									</div>
+									</div> */}
 								</div>
 							</div>
 						</div>
@@ -263,9 +283,8 @@ function Resume(props: ArticleProps, ref: ForwardedRef<HTMLDivElement>) {
 								</h2>
 								<div className='border-2 w-20 border-blue-400 my-3'></div>
 								<p>
-									To get a career opportunity which would help me to utilize my
-									academic background to assist me to gain experience, employ my
-									excellent skills, and enable me to make positive contribution.
+									{formData?.personalData?.heading?.summary ??
+										'Your Professional Summary'}
 								</p>
 							</div>
 
@@ -278,22 +297,26 @@ function Resume(props: ArticleProps, ref: ForwardedRef<HTMLDivElement>) {
 								<div className='flex flex-col'>
 									<div className='flex flex-col'>
 										<p className='text-lg font-bold text-gray-700'>
-											Netcracker Technology | Software Engineer
+											{formData?.professionalData?.company ?? 'Company Name'}
 										</p>
 										<p className='font-semibold text-sm text-gray-700'>
-											2021 - Present
+											{formData?.professionalData?.timePeriod ??
+												'Period of Work'}
 										</p>
 										<p className='font-semibold text-sm text-gray-700 mt-2 mb-1'>
 											Key Responsibilities
 										</p>
 										<ul className='text-sm list-disc pl-4 space-y-1'>
-											<li>Working on customer facing product</li>
-											<li>Deliverying highly efficient solutions</li>
-											<li>Solving critical bugs</li>
+											<li>
+												{formData?.professionalData?.responsibilities ??
+													'Responsibilities'}
+											</li>
+											{/* <li>Deliverying highly efficient solutions</li>
+											<li>Solving critical bugs</li> */}
 										</ul>
 									</div>
 
-									<div className='flex flex-col mt-8'>
+									{/* <div className='flex flex-col mt-8'>
 										<p className='text-lg font-bold text-gray-700'>
 											TailwindFlex.com | Lead
 										</p>
@@ -308,11 +331,11 @@ function Resume(props: ArticleProps, ref: ForwardedRef<HTMLDivElement>) {
 											<li>Solving complex problems</li>
 											<li>Solving critical bugs</li>
 										</ul>
-									</div>
+									</div> */}
 								</div>
 							</div>
 
-							<div className='py-3'>
+							{/* <div className='py-3'>
 								<h2 className='text-lg font-poppins font-bold text-blue-400'>
 									Projects
 								</h2>
@@ -340,7 +363,7 @@ function Resume(props: ArticleProps, ref: ForwardedRef<HTMLDivElement>) {
 										</p>
 									</div>
 								</div>
-							</div>
+							</div> */}
 						</div>
 					</div>
 				</div>
@@ -349,4 +372,4 @@ function Resume(props: ArticleProps, ref: ForwardedRef<HTMLDivElement>) {
 	);
 }
 
-export default forwardRef<HTMLDivElement, ArticleProps>(Resume);
+export default forwardRef<HTMLDivElement, Props>(Resume);

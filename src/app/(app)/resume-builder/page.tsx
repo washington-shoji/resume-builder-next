@@ -1,11 +1,12 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
 	useForm,
 	SubmitHandler,
 	FormProvider,
 	useFormContext,
+	useWatch,
 } from 'react-hook-form';
 
 import BuilderStepper from '@/app/components/BuilderStepper';
@@ -16,13 +17,20 @@ import ResumeEducationalDetails from '@/app/components/ResumeEducationalDetails'
 import { ResumeOneFormInput } from '@/app/types/resume-data.types';
 
 export default function ResumeBuilder() {
+	let storeData: ResumeOneFormInput = {};
 	const [currentStep, setCurrentStep] = useState<number>(0);
-	const methods = useForm<ResumeOneFormInput>();
+	const [savedFormData, setSavedFormData] =
+		useState<ResumeOneFormInput>(storeData);
+	const methods = useForm<ResumeOneFormInput>({ values: savedFormData });
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
+		control,
 	} = methods;
+	const formData = useWatch({
+		control,
+	});
 
 	const numberOfSteps = 3;
 	const stepTitle = ['Personal', 'Professional', 'Educational'];
@@ -35,14 +43,21 @@ export default function ResumeBuilder() {
 		setCurrentStep((prev) => (prev <= 0 ? prev : prev - 1));
 	}
 
-	// function submitHandler(data: any) {
-	// 	console.warn('Form Data >>>>', data);
+	function onSubmit(formData: ResumeOneFormInput): void {
+		console.warn('Form Data >>>>', formData);
+		localStorage.setItem('form-data', JSON.stringify(formData));
+	}
 
-	// 	return data;
-	// }
+	// const onSubmit: SubmitHandler<ResumeOneFormInput> = (data) =>
+	// 	console.log(data);
 
-	const onSubmit: SubmitHandler<ResumeOneFormInput> = (data) =>
-		console.log(data);
+	useEffect(() => {
+		storeData = JSON.parse(localStorage.getItem('form-data') as string);
+		console.warn('storeData', storeData);
+		if (storeData) {
+			setSavedFormData(storeData);
+		}
+	}, []);
 
 	return (
 		<div className=' flex flex-col'>
@@ -98,7 +113,7 @@ export default function ResumeBuilder() {
 				</FormProvider>
 
 				<div className=' flex basis-1/2'>
-					<Preview></Preview>
+					<Preview formData={formData}></Preview>
 				</div>
 			</div>
 		</div>

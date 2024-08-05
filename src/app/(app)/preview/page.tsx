@@ -1,10 +1,15 @@
 'use client';
 
 import Resume from '@/app/components/Resume';
+import { ResumeOneFormInput } from '@/app/types/resume-data.types';
 import { useRef } from 'react';
 import { useReactToPrint } from 'react-to-print';
 
-export default function Preview() {
+interface Props {
+	formData: ResumeOneFormInput;
+}
+
+export default function Preview(props: Props) {
 	const componentRef = useRef<HTMLDivElement>(null);
 	const handlePrint = useReactToPrint({
 		content: () => componentRef.current,
@@ -31,7 +36,7 @@ export default function Preview() {
 						</svg>
 					</button> */}
 			<div>
-				<Resume ref={componentRef}></Resume>
+				<Resume formData={props.formData} ref={componentRef}></Resume>
 			</div>
 		</main>
 	);
