@@ -23,20 +23,22 @@ export default function ResumeEducationalDetails() {
 						</label>
 						<input
 							type='text'
-							id='educationTitle'
-							name='educationTitle'
 							className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500'
 							placeholder='Education Title'
-							aria-invalid={errors?.educationTitle ? 'true' : 'false'}
-							{...(register('educationTitle'), { required: true })}
+							aria-invalid={
+								errors?.educationalData?.educationTitle ? 'true' : 'false'
+							}
+							{...register('educationalData.educationTitle', {
+								required: true,
+							})}
 						/>
-						{errors?.educationTitle && (
+						{errors?.educationalData?.educationTitle && (
 							<p
 								id='standard_error_help'
 								className='mt-2 text-xs text-red-600 dark:text-red-400'
 							>
-								<span className='font-medium'>Oh, snapp!</span> Some error
-								message.
+								<span className='font-medium'>Educational Title</span> is
+								required!
 							</p>
 						)}
 					</div>
@@ -52,16 +54,18 @@ export default function ResumeEducationalDetails() {
 							id='institution'
 							className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500'
 							placeholder='Institution'
-							aria-invalid={errors?.institution ? 'true' : 'false'}
-							{...register('institution', { required: true })}
+							aria-invalid={
+								errors?.educationalData?.institution ? 'true' : 'false'
+							}
+							{...register('educationalData.institution', { required: true })}
 						/>
-						{errors?.institution && (
+						{errors?.educationalData?.institution && (
 							<p
 								id='standard_error_help'
 								className='mt-2 text-xs text-red-600 dark:text-red-400'
 							>
-								<span className='font-medium'>Oh, snapp!</span> Some error
-								message.
+								<span className='font-medium'>Educational Institution</span> is
+								required!
 							</p>
 						)}
 					</div>
@@ -77,16 +81,16 @@ export default function ResumeEducationalDetails() {
 							id='year'
 							className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500'
 							placeholder='Graduation Year'
-							aria-invalid={errors?.year ? 'true' : 'false'}
-							{...register('year', { required: true })}
+							aria-invalid={errors?.educationalData?.year ? 'true' : 'false'}
+							{...register('educationalData.year', { required: true })}
 						/>
-						{errors?.year && (
+						{errors?.educationalData?.year && (
 							<p
 								id='standard_error_help'
 								className='mt-2 text-xs text-red-600 dark:text-red-400'
 							>
-								<span className='font-medium'>Oh, snapp!</span> Some error
-								message.
+								<span className='font-medium'>Graduation Year</span> is
+								required!
 							</p>
 						)}
 					</div>

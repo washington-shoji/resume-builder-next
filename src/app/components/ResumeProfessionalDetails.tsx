@@ -26,16 +26,18 @@ export default function ResumeProfessionalDetails() {
 							id='company'
 							className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500'
 							placeholder='Company and Role Title'
-							aria-invalid={errors?.company ? 'true' : 'false'}
-							{...register('company', { required: true })}
+							aria-invalid={
+								errors?.professionalData?.company ? 'true' : 'false'
+							}
+							{...register('professionalData.company', { required: true })}
 						/>
-						{errors?.company && (
+						{errors?.professionalData?.company && (
 							<p
 								id='standard_error_help'
 								className='mt-2 text-xs text-red-600 dark:text-red-400'
 							>
-								<span className='font-medium'>Oh, snapp!</span> Some error
-								message.
+								<span className='font-medium'>Company and Role title</span> is
+								required.
 							</p>
 						)}
 					</div>
@@ -51,16 +53,18 @@ export default function ResumeProfessionalDetails() {
 							id='timePeriod'
 							className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500'
 							placeholder='Time period'
-							aria-invalid={errors?.timePeriod ? 'true' : 'false'}
-							{...register('timePeriod', { required: true })}
+							aria-invalid={
+								errors?.professionalData?.timePeriod ? 'true' : 'false'
+							}
+							{...register('professionalData.timePeriod', { required: true })}
 						/>
-						{errors?.timePeriod && (
+						{errors?.professionalData?.timePeriod && (
 							<p
 								id='standard_error_help'
 								className='mt-2 text-xs text-red-600 dark:text-red-400'
 							>
-								<span className='font-medium'>Oh, snapp!</span> Some error
-								message.
+								<span className='font-medium'>Employment Time Period</span> is
+								required.
 							</p>
 						)}
 					</div>
@@ -77,16 +81,20 @@ export default function ResumeProfessionalDetails() {
 							rows={8}
 							className='block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500'
 							placeholder='Responsibilities'
-							aria-invalid={errors?.responsibilities ? 'true' : 'false'}
-							{...register('responsibilities', { required: true })}
+							aria-invalid={
+								errors?.professionalData?.responsibilities ? 'true' : 'false'
+							}
+							{...register('professionalData.responsibilities', {
+								required: true,
+							})}
 						></textarea>
-						{errors?.responsibilities && (
+						{errors?.professionalData?.responsibilities && (
 							<p
 								id='standard_error_help'
 								className='mt-2 text-xs text-red-600 dark:text-red-400'
 							>
-								<span className='font-medium'>Oh, snapp!</span> Some error
-								message.
+								<span className='font-medium'>Roles and Responsibilities</span>{' '}
+								is required!
 							</p>
 						)}
 					</div>
@@ -122,16 +130,15 @@ export default function ResumeProfessionalDetails() {
 							id='icon'
 							className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500'
 							placeholder='Icon'
-							aria-invalid={errors?.icon ? 'true' : 'false'}
-							{...register('icon', { required: true })}
+							aria-invalid={errors?.skillData?.icon ? 'true' : 'false'}
+							{...register('skillData.icon', { required: true })}
 						/>
-						{errors?.icon && (
+						{errors?.skillData?.icon && (
 							<p
 								id='standard_error_help'
 								className='mt-2 text-xs text-red-600 dark:text-red-400'
 							>
-								<span className='font-medium'>Oh, snapp!</span> Some error
-								message.
+								<span className='font-medium'>Skill Icon!</span> is required!.
 							</p>
 						)}
 					</div>
@@ -147,16 +154,15 @@ export default function ResumeProfessionalDetails() {
 							id='label'
 							className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500'
 							placeholder='Time period'
-							aria-invalid={errors?.label ? 'true' : 'false'}
-							{...register('label', { required: true })}
+							aria-invalid={errors?.skillData?.label ? 'true' : 'false'}
+							{...register('skillData.label', { required: true })}
 						/>
-						{errors?.label && (
+						{errors?.skillData?.label && (
 							<p
 								id='standard_error_help'
 								className='mt-2 text-xs text-red-600 dark:text-red-400'
 							>
-								<span className='font-medium'>Oh, snapp!</span> Some error
-								message.
+								<span className='font-medium'>Skill Label</span> is required!
 							</p>
 						)}
 					</div>

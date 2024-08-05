@@ -7,6 +7,7 @@ export default function ResumePersonalDetails() {
 		register,
 		formState: { errors },
 	} = useFormContext<ResumeOneFormInput>();
+
 	return (
 		<section className='bg-white dark:bg-gray-900'>
 			<div className='py-8 px-4 mx-auto max-w-2xl lg:py-16'>
@@ -26,16 +27,17 @@ export default function ResumePersonalDetails() {
 							id='fullName'
 							className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500'
 							placeholder='Full name'
-							aria-invalid={errors?.fullName ? 'true' : 'false'}
-							{...register('fullName', { required: true })}
+							aria-invalid={
+								errors?.personalData?.heading?.fullName ? 'true' : 'false'
+							}
+							{...register('personalData.heading.fullName', { required: true })}
 						/>
-						{errors?.fullName && (
+						{errors?.personalData?.heading?.fullName && (
 							<p
 								id='standard_error_help'
 								className='mt-2 text-xs text-red-600 dark:text-red-400'
 							>
-								<span className='font-medium'>Oh, snapp!</span> Some error
-								message.
+								<span className='font-medium'>Full Name</span> is required!.
 							</p>
 						)}
 					</div>
@@ -51,16 +53,19 @@ export default function ResumePersonalDetails() {
 							id='roleTitle'
 							className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500'
 							placeholder='Role title'
-							aria-invalid={errors?.roleTitle ? 'true' : 'false'}
-							{...register('roleTitle', { required: true })}
+							aria-invalid={
+								errors?.personalData?.heading?.roleTitle ? 'true' : 'false'
+							}
+							{...register('personalData.heading.roleTitle', {
+								required: true,
+							})}
 						/>
-						{errors?.roleTitle && (
+						{errors?.personalData?.heading?.roleTitle && (
 							<p
 								id='standard_error_help'
 								className='mt-2 text-xs text-red-600 dark:text-red-400'
 							>
-								<span className='font-medium'>Oh, snapp!</span> Some error
-								message.
+								<span className='font-medium'>Role Title</span> is required!.
 							</p>
 						)}
 					</div>
@@ -77,16 +82,18 @@ export default function ResumePersonalDetails() {
 							rows={8}
 							className='block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500'
 							placeholder='Your description here'
-							aria-invalid={errors?.summary ? 'true' : 'false'}
-							{...register('summary', { required: true })}
+							aria-invalid={
+								errors?.personalData?.heading?.summary ? 'true' : 'false'
+							}
+							{...register('personalData.heading.summary', { required: true })}
 						></textarea>
-						{errors?.roleTitle && (
+						{errors?.personalData?.heading?.summary && (
 							<p
 								id='standard_error_help'
 								className='mt-2 text-xs text-red-600 dark:text-red-400'
 							>
-								<span className='font-medium'>Oh, snapp!</span> Some error
-								message.
+								<span className='font-medium'>Professional Summary</span> is
+								required!.
 							</p>
 						)}
 					</div>
