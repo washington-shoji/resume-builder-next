@@ -1,4 +1,5 @@
 import React from 'react';
+import { LuArrowBigRightDash } from 'react-icons/lu';
 
 type Props = {
 	currentStep: number;
@@ -36,21 +37,9 @@ export default function BuilderStepper(props: Props) {
 							</span>
 							{props?.stepTitle[index]}
 							<span className='hidden sm:inline-flex sm:ms-2'>Details</span>
-							<svg
-								className='w-3 h-3 ms-2 sm:ms-4 rtl:rotate-180'
-								aria-hidden='true'
-								xmlns='http://www.w3.org/2000/svg'
-								fill='none'
-								viewBox='0 0 12 10'
-							>
-								<path
-									stroke='currentColor'
-									strokeLinecap='round'
-									strokeLinejoin='round'
-									strokeWidth='2'
-									d='m7 9 4-4-4-4M1 9l4-4-4-4'
-								/>
-							</svg>
+							<LuArrowBigRightDash
+								className={`text-2xl ml-2 ${index - 1 ? 'hidden' : ''}`}
+							/>
 						</li>
 					);
 				}

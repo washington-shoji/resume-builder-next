@@ -1,13 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import {
-	useForm,
-	SubmitHandler,
-	FormProvider,
-	useFormContext,
-	useWatch,
-} from 'react-hook-form';
+import { useForm, FormProvider, useWatch } from 'react-hook-form';
 
 import BuilderStepper from '@/app/components/BuilderStepper';
 import ResumePersonalDetails from '@/app/components/ResumePersonalDetails';
@@ -17,17 +11,44 @@ import ResumeEducationalDetails from '@/app/components/ResumeEducationalDetails'
 import { ResumeOneFormInput } from '@/app/types/resume-data.types';
 
 export default function ResumeBuilder() {
+	// TODO: There is too much business logic in this PreviewComponent
+	// TODO: Needs to break into smaller pieces
+
 	let storeData: ResumeOneFormInput = {};
 	const [currentStep, setCurrentStep] = useState<number>(0);
-	const [savedFormData, setSavedFormData] =
-		useState<ResumeOneFormInput>(storeData);
-	const methods = useForm<ResumeOneFormInput>({ values: savedFormData });
-	const {
-		register,
-		handleSubmit,
-		formState: { errors },
-		control,
-	} = methods;
+	const [savedFormData, setSavedFormData] = useState<
+		ResumeOneFormInput | undefined
+	>(undefined);
+	const methods = useForm<ResumeOneFormInput>({
+		values: savedFormData,
+		defaultValues: {
+			personalData: {
+				heading: {
+					fullName: 'User Name',
+					roleTitle: 'User Role',
+					summary: 'User short summary',
+				},
+				contact: [{ iconLabel: 'email', contactInfo: 'user@email' }],
+			},
+			professionalData: [
+				{
+					company: 'User Work Place',
+					timePeriod: '2000 - Present',
+					responsibilities: 'User Responsibilities',
+				},
+			],
+			skillData: [{ iconLabel: 'node', label: 'User Skill' }],
+			educationalData: [
+				{
+					year: '2000',
+					educationTitle: 'User Education',
+					institution: 'User Education Institution',
+				},
+			],
+		},
+		mode: 'onBlur',
+	});
+	const { handleSubmit, control } = methods;
 	const formData = useWatch({
 		control,
 	});
@@ -44,12 +65,9 @@ export default function ResumeBuilder() {
 	}
 
 	function onSubmit(formData: ResumeOneFormInput): void {
-		console.warn('Form Data >>>>', formData);
+		localStorage.removeItem('form-data');
 		localStorage.setItem('form-data', JSON.stringify(formData));
 	}
-
-	// const onSubmit: SubmitHandler<ResumeOneFormInput> = (data) =>
-	// 	console.log(data);
 
 	useEffect(() => {
 		storeData = JSON.parse(localStorage.getItem('form-data') as string);
@@ -66,9 +84,11 @@ export default function ResumeBuilder() {
 				numberOfSteps={numberOfSteps}
 				stepTitle={stepTitle}
 			></BuilderStepper>
-			<div className=' flex  justify-center'>
+
+			<div className=' flex justify-center mb-4'>
 				<FormProvider {...methods}>
 					<form onSubmit={handleSubmit(onSubmit)}>
+						{/* TODO: Improve this conditional rendering logic */}
 						<div className={currentStep !== 0 ? ' hidden' : ''}>
 							<ResumePersonalDetails></ResumePersonalDetails>
 						</div>
@@ -105,7 +125,7 @@ export default function ResumeBuilder() {
 									type='submit'
 									className='inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800'
 								>
-									Submit
+									Save data
 								</button>
 							)}
 						</div>
