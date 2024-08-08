@@ -11,15 +11,21 @@ interface Props {
 	formData: ResumeOneFormInput;
 }
 
-export default function Preview(props: Props) {
+export default function PreviewResume(props: Props) {
 	const componentRef = useRef<HTMLDivElement>(null);
 	const handlePrint = useReactToPrint({
 		content: () => componentRef.current,
 	});
 
 	function onDeleteData(): void {
-		localStorage.removeItem('form-data');
-		window.location.reload();
+		if (
+			window.confirm(
+				"Are you sure you and to delete the Resume Data? It's irreversible!"
+			)
+		) {
+			localStorage.removeItem('form-data');
+			window.location.reload();
+		}
 	}
 
 	return (
