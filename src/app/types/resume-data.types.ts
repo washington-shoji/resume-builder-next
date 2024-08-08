@@ -1,40 +1,44 @@
+import { IconType } from 'react-icons';
+
 export interface ResumeOneFormInput {
 	personalData?: {
 		heading?: Heading;
-		contact?: Contact;
+		contact?: Contact[];
 	};
-	professionalData?: Professional;
-	skillData?: Skill;
-	educationalData?: Education;
+	professionalData?: Professional[];
+	skillData?: Skill[];
+	educationalData?: Education[];
 }
 
-interface Heading {
+export interface Heading {
 	fullName?: string;
 	roleTitle?: string;
 	summary?: string;
 }
 
-interface Contact {
-	email?: string;
-	phoneNumber?: string;
-	githubLink?: string;
-	linkedInLink?: string;
-	personalWebsiteLink?: string;
+export interface Contact {
+	iconLabel?: string;
+	contactInfo?: string;
 }
 
-interface Professional {
+export interface Professional {
 	company?: string;
 	timePeriod?: string;
 	responsibilities?: string;
 }
 
-interface Skill {
-	icon?: string;
+export interface Skill {
+	iconLabel?: string;
 	label?: string;
 }
 
-interface Education {
+export interface Education {
 	year?: string;
 	educationTitle?: string;
 	institution?: string;
 }
+
+export type Icon = {
+	Icon: IconType;
+	iconLabel: string;
+};
