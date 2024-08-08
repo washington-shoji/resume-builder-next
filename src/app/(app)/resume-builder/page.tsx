@@ -5,10 +5,10 @@ import { useForm, FormProvider, useWatch } from 'react-hook-form';
 
 import BuilderStepper from '@/app/components/BuilderStepper';
 import ResumePersonalDetails from '@/app/components/ResumePersonalDetails';
-import Preview from '../preview/page';
 import ResumeProfessionalDetails from '@/app/components/ResumeProfessionalDetails';
 import ResumeEducationalDetails from '@/app/components/ResumeEducationalDetails';
 import { ResumeOneFormInput } from '@/app/types/resume-data.types';
+import PreviewResume from '@/app/components/PreviewResume';
 
 export default function ResumeBuilder() {
 	// TODO: There is too much business logic in this PreviewComponent
@@ -133,7 +133,7 @@ export default function ResumeBuilder() {
 				</FormProvider>
 
 				<div className=' flex basis-1/2'>
-					<Preview formData={formData}></Preview>
+					<PreviewResume formData={formData}></PreviewResume>
 				</div>
 			</div>
 		</div>

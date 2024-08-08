@@ -1,5 +1,5 @@
 import React from 'react';
-import { Icon, ResumeOneFormInput } from '../types/resume-data.types';
+import { ResumeOneFormInput } from '../types/resume-data.types';
 import { useFieldArray, useFormContext } from 'react-hook-form';
 import { skillIcons } from '../data/icons';
 
