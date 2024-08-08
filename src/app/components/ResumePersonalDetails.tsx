@@ -1,12 +1,19 @@
 import React from 'react';
-import { FieldErrors, useFormContext, UseFormRegister } from 'react-hook-form';
+import { useFieldArray, useFormContext } from 'react-hook-form';
 import { ResumeOneFormInput } from '../types/resume-data.types';
+import { contactInfoLabels } from '../data/icons';
 
 export default function ResumePersonalDetails() {
 	const {
 		register,
+		control,
 		formState: { errors },
 	} = useFormContext<ResumeOneFormInput>();
+
+	const { fields, append, remove } = useFieldArray({
+		name: 'personalData.contact',
+		control,
+	});
 
 	return (
 		<section className='bg-white dark:bg-gray-900'>
@@ -67,6 +74,120 @@ export default function ResumePersonalDetails() {
 							>
 								<span className='font-medium'>Role Title</span> is required!.
 							</p>
+						)}
+					</div>
+
+					<div className='sm:col-span-2'>
+						{fields.map((field, index) => {
+							return (
+								<React.Fragment key={field.id}>
+									<button
+										type='button'
+										className={`w-full inline-flex items-center gap-2 mb-4 px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-red-700 rounded-lg focus:ring-4 focus:ring-red-200 dark:focus:ring-red-900 hover:bg-red-800 ${
+											fields.length === 1 ? 'hidden' : ''
+										}`}
+										disabled={fields.length === 1}
+										onClick={() => remove(index)}
+									>
+										Remove the contact below
+									</button>
+
+									<div className='w-full mb-4'>
+										<label
+											htmlFor='category'
+											className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'
+										>
+											Contact Icon
+										</label>
+										<select
+											id='icon'
+											className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500'
+											aria-invalid={
+												errors?.personalData?.contact?.[index]?.iconLabel
+													? 'true'
+													: 'false'
+											}
+											{...register(
+												`personalData.contact.${index}.iconLabel` as const,
+												{ required: true }
+											)}
+										>
+											{contactInfoLabels.map((item) => {
+												return (
+													<option
+														key={item.iconLabel}
+														defaultValue={item.iconLabel}
+														value={item.iconLabel}
+													>
+														{item.iconLabel}
+													</option>
+												);
+											})}
+										</select>
+										{errors?.personalData?.contact?.[index]?.iconLabel && (
+											<p
+												id='standard_error_help'
+												className='mt-2 text-xs text-red-600 dark:text-red-400'
+											>
+												<span className='font-medium'>Contact Icon!</span> is
+												required!.
+											</p>
+										)}
+									</div>
+
+									<div className='w-full'>
+										<label
+											htmlFor='brand'
+											className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'
+										>
+											Your contact info
+										</label>
+										<input
+											type='text'
+											id='roleTitle'
+											className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500'
+											placeholder='Contact or link'
+											aria-invalid={
+												errors?.personalData?.contact?.[index]?.contactInfo
+													? 'true'
+													: 'false'
+											}
+											{...register(
+												`personalData.contact.${index}.contactInfo` as const,
+												{
+													required: true,
+												}
+											)}
+										/>
+										{errors?.personalData?.heading?.roleTitle && (
+											<p
+												id='standard_error_help'
+												className='mt-2 text-xs text-red-600 dark:text-red-400'
+											>
+												<span className='font-medium'>Role Title</span> is
+												required!.
+											</p>
+										)}
+									</div>
+								</React.Fragment>
+							);
+						})}
+					</div>
+
+					<div className='sm:col-span-2'>
+						{fields.length <= 3 && (
+							<button
+								type='button'
+								className='w-full inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-gray-700 rounded-lg focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-900 hover:bg-gray-800'
+								onClick={() =>
+									append({
+										iconLabel: '',
+										contactInfo: '',
+									})
+								}
+							>
+								Add a new contact
+							</button>
 						)}
 					</div>
 
