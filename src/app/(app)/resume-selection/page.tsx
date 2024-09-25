@@ -42,7 +42,7 @@ export default function ResumeSelection() {
 	}
 
 	return (
-		<main className='flex justify-center items-center min-h-screen bg-white dark:bg-gray-900 p-4 sm:p-0'>
+		<main className='flex justify-center items-center gap-4 min-h-screen bg-white dark:bg-gray-900 p-4 sm:p-0'>
 			<div className=' flex flex-col gap-4'>
 				<div className='mr-auto place-self-center lg:col-span-7'>
 					<h1 className='max-w-2xl mb-4 text-2xl font-extrabold tracking-tight leading-none md:text-3xl xl:text-4xl dark:text-white'>
@@ -95,6 +95,15 @@ export default function ResumeSelection() {
 						</div>
 					</div>
 				</div>
+			</div>
+			<div className=' border-2 border-blue-500 w-1/4 min-h-[50vh] rounded-md'>
+				{templates.map((t) => {
+					if (t.templateId === selected) {
+						return (
+							<Image width={200} height={200} src={t.image} alt=''></Image>
+						);
+					}
+				})}
 			</div>
 		</main>
 	);
