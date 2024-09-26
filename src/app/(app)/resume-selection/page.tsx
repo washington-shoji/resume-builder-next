@@ -96,11 +96,11 @@ export default function ResumeSelection() {
 					</div>
 				</div>
 			</div>
-			<div className=' border-2 border-blue-500 w-1/4 min-h-[50vh] rounded-md'>
+			<div className=' border-2 border-blue-500  rounded-md'>
 				{templates.map((t) => {
 					if (t.templateId === selected) {
 						return (
-							<Image width={200} height={200} src={t.image} alt=''></Image>
+							<Image width={800} height={800} src={t.image} alt=''></Image>
 						);
 					}
 				})}
