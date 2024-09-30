@@ -5,7 +5,7 @@ import './globals.css';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-	title: 'Code.Sydney Resume Builder',
+	title: 'Resume Builder',
 	description: 'Create beautiful resumes',
 };
 
