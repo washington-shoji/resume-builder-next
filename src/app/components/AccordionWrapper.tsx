@@ -3,8 +3,8 @@
 import { useState } from "react";
 
 interface Probs {
-    title: string;
-    children: React.ReactNode;
+  title: string;
+  children: React.ReactNode;
 }
 
 export default function AccordionWrapper(props: Probs) {
