@@ -1,17 +1,17 @@
 import { icons } from "@/app/data/icons";
 import { ResumeOneFormInput } from "@/app/types/resume-data.types";
 import { splitStringByPipe } from "@/app/utils/utils";
-import React from "react";
+import React, { ForwardedRef, forwardRef } from "react";
 
 interface Props {
   formData: ResumeOneFormInput;
 }
 
-export default function ResumeOne(props: Props) {
+function ResumeOne(props: Props, ref: ForwardedRef<HTMLDivElement>) {
   const { formData } = props;
 
   return (
-    <div className="relative block mx-auto bg-white shadow-md">
+    <div className="relative block mx-auto bg-white" ref={ref}>
       <div className="h-[220px] bg-blue-500 text-white relative">
         <div className="absolute left-[calc(350px+5%)] right-0 bottom-0 h-[120px] text-center font-['Raleway'] text-[58px] tracking-[8px] font-thin leading-[60px]">
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[94%]">
@@ -73,7 +73,7 @@ export default function ResumeOne(props: Props) {
                   {educationalItem?.year ?? "Graduation Year"}
                 </p>
                 <p className="text-sm font-medium">
-                  <span className="text-blue-400">
+                  <span className="text-blue-500">
                     {educationalItem?.educationTitle ?? "Your Education Title"}
                   </span>
                   {" - "} {educationalItem?.institution ?? "Your Institution"}
@@ -90,7 +90,7 @@ export default function ResumeOne(props: Props) {
         </h2>
         <div className="w-[240px] h-[2px] bg-blue-600 my-6 mx-auto"></div>
 
-        <div className="bg-blue-300 max-w-[580px] text-center text-base tracking-[6px] font-semibold leading-7 uppercase mb-6">
+        <div className="bg-blue-300 text-center text-base tracking-[6px] font-semibold leading-7 uppercase mb-6">
           Profile
         </div>
         <p className="text-justify mb-12 mr-6">
@@ -98,7 +98,7 @@ export default function ResumeOne(props: Props) {
             "Your Professional Summary"}
         </p>
 
-        <div className="bg-blue-300 max-w-[580px] text-center text-base tracking-[6px] font-semibold leading-7 uppercase mb-6">
+        <div className="bg-blue-300 text-center text-base tracking-[6px] font-semibold leading-7 uppercase mb-6">
           Professional Experience
         </div>
 
@@ -130,3 +130,5 @@ export default function ResumeOne(props: Props) {
     </div>
   );
 }
+
+export default forwardRef<HTMLDivElement, Props>(ResumeOne);
