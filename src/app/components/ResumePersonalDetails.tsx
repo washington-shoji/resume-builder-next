@@ -132,15 +132,13 @@ export default function ResumePersonalDetails() {
                       )}
                     </div>
 
-                    <div className="w-full ">
+                    <div className={fields.length === 1 ? "hidden" : "w-full"}>
                       <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                         Remove from form
                       </label>
                       <button
                         type="button"
-                        className={`w-full p-3  text-sm font-medium text-center text-white bg-red-700 rounded-lg focus:ring-4 focus:ring-red-200 dark:focus:ring-red-900 hover:bg-red-800 ${
-                          fields.length === 1 ? "hidden" : ""
-                        }`}
+                        className="w-full p-3  text-sm font-medium text-center text-white bg-red-700 rounded-lg focus:ring-4 focus:ring-red-200 dark:focus:ring-red-900 hover:bg-red-800"
                         disabled={fields.length === 1}
                         onClick={() => remove(index)}
                       >
