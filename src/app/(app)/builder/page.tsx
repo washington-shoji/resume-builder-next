@@ -6,6 +6,8 @@ import AccordionWrapper from "@/app/components/AccordionWrapper";
 import { ResumeOneFormInput } from "@/app/types/resume-data.types";
 import { FormProvider, useForm, useWatch } from "react-hook-form";
 import ResumePersonalDetails from "@/app/components/ResumePersonalDetails";
+import ResumeProfessionalDetails from "@/app/components/ResumeProfessionalDetails";
+import ResumeEducationalDetails from "@/app/components/ResumeEducationalDetails";
 
 export default function Builder() {
   let storeData: ResumeOneFormInput = {};
@@ -66,9 +68,17 @@ export default function Builder() {
       <div className="grid sm:grid-cols-2 gap-6">
         <FormProvider {...methods}>
           <form onSubmit={handleSubmit(onSubmit)}>
-            <div className=" flex flex-col gap-4 mt-6 ml-6">
+            <div className=" flex flex-col gap-4 mt-16 xl:mx-32">
               <AccordionWrapper title="Personal Details">
                 <ResumePersonalDetails></ResumePersonalDetails>
+              </AccordionWrapper>
+
+              <AccordionWrapper title="Professional Details">
+                <ResumeProfessionalDetails></ResumeProfessionalDetails>
+              </AccordionWrapper>
+
+              <AccordionWrapper title="Education Details">
+                <ResumeEducationalDetails></ResumeEducationalDetails>
               </AccordionWrapper>
             </div>
           </form>
