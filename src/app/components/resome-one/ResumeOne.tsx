@@ -1,13 +1,21 @@
+import { icons } from "@/app/data/icons";
+import { ResumeOneFormInput } from "@/app/types/resume-data.types";
+import { splitStringByPipe } from "@/app/utils/utils";
 import React from "react";
-import { FaEnvelope, FaLinkedin } from "react-icons/fa";
 
-export default function ResumeOne() {
+interface Props {
+  formData: ResumeOneFormInput;
+}
+
+export default function ResumeOne(props: Props) {
+  const { formData } = props;
+
   return (
-    <div className="relative block w-[90%] max-w-[1200px] my-20 mx-auto bg-white shadow-md">
+    <div className="relative block mx-auto bg-white shadow-md">
       <div className="h-[220px] bg-blue-500 text-white relative">
         <div className="absolute left-[calc(350px+5%)] right-0 bottom-0 h-[120px] text-center font-['Raleway'] text-[58px] tracking-[8px] font-thin leading-[60px]">
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[94%]">
-            Candidate's Name
+            {formData.personalData?.heading?.fullName ?? "Full Name"}
           </div>
         </div>
       </div>
@@ -17,34 +25,68 @@ export default function ResumeOne() {
           Personal Details
         </p>
 
-        <div className="flex items-center gap-2">
-          <FaEnvelope />
-          <p>email@email.com</p>
-        </div>
-
-        <div className="flex items-center gap-2">
-          <FaLinkedin />
-          <p>Linked-in</p>
-        </div>
+        {formData.personalData?.contact?.map((contactItem, index) => {
+          return (
+            <div key={index} className="flex items-center gap-2">
+              {icons.map((icon, index) => {
+                if (icon.iconLabel === contactItem.iconLabel) {
+                  return <icon.Icon key={index}></icon.Icon>;
+                }
+              })}
+              <p>{contactItem.contactInfo}</p>
+            </div>
+          );
+        })}
 
         <p className="uppercase text-base tracking-[4px] font-semibold leading-7 mt-16 mx-auto mb-2 pb-1 border-b border-blue-500">
           Expertise
         </p>
-        <p className="mb-2.5">HTML</p>
-        <p className="mb-2.5">CSS (Stylus)</p>
-        <p className="mb-2.5">JavaScript & jQuery</p>
+
+        {formData?.skillData?.map((skillItem, index) => {
+          return (
+            <div key={index} className="flex items-center my-1">
+              {icons.map((icon, index) => {
+                if (icon.iconLabel === skillItem.iconLabel) {
+                  return (
+                    <icon.Icon
+                      className=" text-gray-700"
+                      size={25}
+                      key={index}
+                    ></icon.Icon>
+                  );
+                }
+              })}
+              <div className="ml-2">{skillItem.label ?? "Your Skill"}</div>
+            </div>
+          );
+        })}
 
         <p className="uppercase text-base tracking-[4px] font-semibold leading-7 mt-16 mx-auto mb-2 pb-1 border-b border-blue-500">
           Education
         </p>
-        <p className="mb-2.5">Lorem Ipsum is simply dummy text</p>
-        <p className="mb-2.5">Lorem Ipsum is simply dummy text</p>
-        <p className="mb-2.5">Lorem Ipsum is simply dummy text</p>
+
+        {formData?.educationalData?.map((educationalItem, index) => {
+          return (
+            <div key={index}>
+              <div className="flex flex-col">
+                <p className="font-semibold text-gray-700">
+                  {educationalItem?.year ?? "Graduation Year"}
+                </p>
+                <p className="text-sm font-medium">
+                  <span className="text-blue-400">
+                    {educationalItem?.educationTitle ?? "Your Education Title"}
+                  </span>
+                  {" - "} {educationalItem?.institution ?? "Your Institution"}
+                </p>
+              </div>
+            </div>
+          );
+        })}
       </div>
 
       <div className="relative ml-[calc(380px+5%)] w-[calc(95%-350px)] pt-6 pr-10 pb-12">
         <h2 className="w-full text-center text-3xl tracking-[5px] font-semibold leading-10 text-black">
-          Software Developer
+          {formData.personalData?.heading?.roleTitle ?? "Your Role"}
         </h2>
         <div className="w-[240px] h-[2px] bg-blue-600 my-6 mx-auto"></div>
 
@@ -52,56 +94,38 @@ export default function ResumeOne() {
           Profile
         </div>
         <p className="text-justify mb-12 mr-6">
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s, when an unknown printer took a galley of type and
-          scrambled it to make a type specimen book. It has survived not only
-          five centuries, but also the leap into electronic typesetting,
-          remaining essentially unchanged.
+          {formData?.personalData?.heading?.summary ??
+            "Your Professional Summary"}
         </p>
 
         <div className="bg-blue-300 max-w-[580px] text-center text-base tracking-[6px] font-semibold leading-7 uppercase mb-6">
-          Experience
+          Professional Experience
         </div>
 
-        <h3 className="text-[21px] tracking-wide font-semibold leading-7 text-black mb-1">
-          Job #1
-        </h3>
-        <p className="text-blue-500 mb-4">First job description</p>
-        <p className="text-justify mb-8 mr-6">
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s, when an unknown printer took a galley of type and
-          scrambled it to make a type specimen book. It has survived not only
-          five centuries, but also the leap into electronic typesetting,
-          remaining essentially unchanged.
-        </p>
-
-        <h3 className="text-[21px] tracking-wide font-semibold leading-7 text-black mb-1">
-          Job #2
-        </h3>
-        <p className="text-blue-500 mb-4">Second Job Description</p>
-        <p className="text-justify mb-8 mr-6">
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s, when an unknown printer took a galley of type and
-          scrambled it to make a type specimen book. It has survived not only
-          five centuries, but also the leap into electronic typesetting,
-          remaining essentially unchanged.
-        </p>
-
-        <h3 className="text-[21px] tracking-wide font-semibold leading-7 text-black mb-1">
-          Job #3
-        </h3>
-        <p className="text-blue-500 mb-4">Third Job Description</p>
-        <p className="text-justify mr-6">
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s, when an unknown printer took a galley of type and
-          scrambled it to make a type specimen book. It has survived not only
-          five centuries, but also the leap into electronic typesetting,
-          remaining essentially unchanged.
-        </p>
+        {formData?.professionalData?.map((professionalItem, index) => {
+          return (
+            <div key={index} className="flex flex-col">
+              <div className="flex flex-col">
+                <h3 className="text-lg font-bold text-gray-700">
+                  {professionalItem?.company ?? "Company Name"}
+                </h3>
+                <p className="font-semibold text-sm text-gray-700">
+                  {professionalItem?.timePeriod ?? "Period of Work"}
+                </p>
+                <p className="font-semibold text-sm text-gray-700 mt-2 mb-1">
+                  Key Responsibilities
+                </p>
+                <ul className="text-sm list-disc pl-4 space-y-1">
+                  {splitStringByPipe(
+                    professionalItem?.responsibilities ?? "Responsibilities"
+                  ).map((responsibility, index) => {
+                    return <li key={index}>{responsibility}</li>;
+                  })}
+                </ul>
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
