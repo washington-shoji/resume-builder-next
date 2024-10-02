@@ -13,14 +13,14 @@ function ResumeOne(props: Props, ref: ForwardedRef<HTMLDivElement>) {
   return (
     <div className="relative block mx-auto bg-white" ref={ref}>
       <div className="h-[220px] bg-blue-500 text-white relative">
-        <div className="absolute left-[calc(350px+5%)] right-0 bottom-0 h-[120px] text-center font-['Raleway'] text-[58px] tracking-[8px] font-thin leading-[60px]">
+        <div className="absolute left-[calc(300px)] right-0 bottom-0 h-[120px] text-center font-['Raleway'] text-[58px] tracking-[8px] font-thin leading-[60px]">
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[94%]">
             {formData.personalData?.heading?.fullName ?? "Full Name"}
           </div>
         </div>
       </div>
 
-      <div className="absolute top-[60px] left-[5%] bottom-0 w-[350px] bg-blue-100 pt-[190px] px-8 pb-12">
+      <div className="absolute top-[60px] left-[2%] bottom-0 w-[280px] bg-blue-100 pt-[190px] px-4 pb-12">
         <p className="uppercase text-base tracking-[4px] font-semibold leading-7 mx-auto mb-2 pb-1 border-b border-blue-500">
           Personal Details
         </p>
@@ -70,13 +70,13 @@ function ResumeOne(props: Props, ref: ForwardedRef<HTMLDivElement>) {
             <div key={index}>
               <div className="flex flex-col">
                 <p className="font-semibold text-gray-700">
-                  {educationalItem?.year ?? "Graduation Year"}
-                </p>
-                <p className="text-sm font-medium">
+                  {educationalItem?.year ?? "Graduation Year"} {" - "}{" "}
                   <span className="text-blue-500">
                     {educationalItem?.educationTitle ?? "Your Education Title"}
                   </span>
-                  {" - "} {educationalItem?.institution ?? "Your Institution"}
+                </p>
+                <p className=" font-medium">
+                  {educationalItem?.institution ?? "Your Institution"}
                 </p>
               </div>
             </div>
@@ -84,7 +84,7 @@ function ResumeOne(props: Props, ref: ForwardedRef<HTMLDivElement>) {
         })}
       </div>
 
-      <div className="relative ml-[calc(380px+5%)] w-[calc(95%-350px)] pt-6 pr-10 pb-12">
+      <div className="relative ml-[calc(300px+5%)] w-[calc(95%-300px)] pt-6 pr-10 pb-12">
         <h2 className="w-full text-center text-3xl tracking-[5px] font-semibold leading-10 text-black">
           {formData.personalData?.heading?.roleTitle ?? "Your Role"}
         </h2>
