@@ -83,7 +83,7 @@ export default function Builder() {
   }, []);
 
   return (
-    <main className="flex justify-center min-h-screen bg-sky-50 dark:bg-gray-900">
+    <main className="flex flex-col sm:flex-row justify-center min-h-screen bg-sky-50 dark:bg-gray-900">
       <div className="grid sm:grid-cols-2 gap-6">
         <FormProvider {...methods}>
           <form onSubmit={handleSubmit(onSubmit)}>
