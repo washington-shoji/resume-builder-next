@@ -7,6 +7,16 @@ const nextConfig = {
 				hostname: 'cdn.dribbble.com', // TODO: Remove placeholder config
 				port: '',
 			},
+			{
+				protocol: 'https',
+				hostname: 's3.amazonaws.com', // TODO: Remove placeholder config
+				port: '',
+			},
+			{
+				protocol: 'https',
+				hostname: 'i.postimg.cc', // TODO: Remove placeholder config
+				port: '',
+			},
 		],
 	},
 };
