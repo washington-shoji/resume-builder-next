@@ -1,7 +1,7 @@
+import React, { ForwardedRef, forwardRef } from "react";
 import { icons } from "@/app/data/icons";
 import { ResumeOneFormInput } from "@/app/types/resume-data.types";
 import { splitStringByPipe } from "@/app/utils/utils";
-import React, { ForwardedRef, forwardRef } from "react";
 
 interface Props {
   formData: ResumeOneFormInput;
@@ -107,7 +107,7 @@ function ResumeOne(props: Props, ref: ForwardedRef<HTMLDivElement>) {
             <div key={index} className="flex flex-col">
               <div className="flex flex-col">
                 <h3 className="text-lg font-bold text-gray-700">
-                  {professionalItem?.company ?? "Company Name"}
+                  {professionalItem?.company ?? "Company Name and Role"}
                 </h3>
                 <p className="font-semibold text-sm text-gray-700">
                   {professionalItem?.timePeriod ?? "Period of Work"}
