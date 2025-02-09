@@ -10,6 +10,9 @@ import ResumeProfessionalDetails from "@/app/components/ResumeProfessionalDetail
 import ResumeEducationalDetails from "@/app/components/ResumeEducationalDetails";
 import { FaEye, FaSave, FaTrashAlt } from "react-icons/fa";
 import { useReactToPrint } from "react-to-print";
+import ResumeTwo from "@/app/components/resumes/ResumeTwo";
+import ResumeThree from "@/app/components/resumes/ResumeThree";
+import ResumeFive from "@/app/components/resumes/ResumeFive";
 
 export default function Builder() {
   let storeData: ResumeOneFormInput = {};
@@ -17,6 +20,10 @@ export default function Builder() {
   const [savedFormData, setSavedFormData] = useState<
     ResumeOneFormInput | undefined
   >(undefined);
+
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current,
+  });
 
   const methods = useForm<ResumeOneFormInput>({
     values: savedFormData,
@@ -70,9 +77,25 @@ export default function Builder() {
     }
   }
 
-  const handlePrint = useReactToPrint({
-    content: () => componentRef.current,
-  });
+  function RenderResume(): React.JSX.Element {
+    const paramResumeName: string = "resumeFive";
+    switch (paramResumeName) {
+      case "resumeOne":
+        return <ResumeOne formData={formData} ref={componentRef} />;
+
+      case "resumeTwo":
+        return <ResumeTwo formData={formData} ref={componentRef} />;
+
+      case "resumeThree":
+        return <ResumeThree formData={formData} ref={componentRef} />;
+
+      case "resumeFive":
+        return <ResumeFive formData={formData} ref={componentRef} />;
+
+      default:
+        return <ResumeOne formData={formData} ref={componentRef} />;
+    }
+  }
 
   useEffect(() => {
     storeData = JSON.parse(localStorage.getItem("form-data") as string);
@@ -141,7 +164,7 @@ export default function Builder() {
         </FormProvider>
 
         <div className=" flex flex-col bg-white m-16 rounded-md shadow-md p-4">
-          <ResumeOne formData={formData} ref={componentRef} />
+          <RenderResume></RenderResume>
         </div>
       </div>
     </main>
